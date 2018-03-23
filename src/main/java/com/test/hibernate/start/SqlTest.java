@@ -1,5 +1,7 @@
 package com.test.hibernate.start;
 
+import java.util.List;
+
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -13,6 +15,7 @@ public class SqlTest {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
 		SQLQuery selectAuthorsQuery = session.createSQLQuery("select * from authors").addEntity(Author.class);
+		List<Author> authors = null;
 
 		try {
 
@@ -21,12 +24,15 @@ public class SqlTest {
 			Author firstAuthor = (Author) session.get(Author.class, 1L);
 			System.out.println(firstAuthor);
 
-			selectAuthorsQuery.list().stream().forEach(System.out::println);
+			// authors = selectAuthorsQuery.list();
+			// authors.stream().forEach(System.out::println);
 
 			SQLQuery queryUpdate = session.createSQLQuery("update authors set name = ? where id = ?");
 			queryUpdate.setParameter(0, "Atoms For Peace");
 			queryUpdate.setParameter(1, "2");
 			queryUpdate.executeUpdate();
+
+			authors = selectAuthorsQuery.list();
 
 			session.getTransaction().commit();
 
@@ -37,6 +43,8 @@ public class SqlTest {
 			session.close();
 			sessionFactory.close();
 		}
+
+		authors.stream().forEach(System.out::println);
 	}
 
 }
