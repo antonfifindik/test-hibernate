@@ -56,4 +56,9 @@ public class Album extends Model {
 		this.genre = genre;
 	}
 
+	@Override
+	public String toString() {
+		return getName() + ". " + getAuthor() + ". " + getGenre();
+	}
+
 }

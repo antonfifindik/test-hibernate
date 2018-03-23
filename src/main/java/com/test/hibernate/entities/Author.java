@@ -23,6 +23,10 @@ public class Author extends Model {
 	public Author() {
 	}
 
+	public Author(String name) {
+		super(name);
+	}
+
 	public Set<Song> getSongs() {
 		return songs;
 	}
@@ -33,7 +37,7 @@ public class Author extends Model {
 
 	@Override
 	public String toString() {
-		return getId() + ". - " + getName();
+		return getName();
 	}
 
 }

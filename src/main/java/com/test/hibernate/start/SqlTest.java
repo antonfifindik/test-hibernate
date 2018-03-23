@@ -21,6 +21,8 @@ public class SqlTest {
 
 			session.beginTransaction();
 
+			// session.save(new Author("The National"));
+
 			Author firstAuthor = (Author) session.get(Author.class, 1L);
 			System.out.println(firstAuthor);
 

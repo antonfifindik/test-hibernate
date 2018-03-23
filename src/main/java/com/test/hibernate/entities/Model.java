@@ -36,6 +36,10 @@ public abstract class Model implements Serializable {
 		this.id = id;
 	}
 
+	public Model(String name) {
+		this.name = name;
+	}
+
 	public Long getId() {
 		return id;
 	}
