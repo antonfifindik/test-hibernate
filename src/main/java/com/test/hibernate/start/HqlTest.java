@@ -24,6 +24,10 @@ public class HqlTest {
 
 			session.beginTransaction();
 
+			Author author = (Author) session.get(Author.class, 3L);
+			author.setName("LCD Soundsystem");
+			session.update(author);
+
 			Query query = session.createQuery("FROM Author");
 			authors = query.list();
 
@@ -41,7 +45,7 @@ public class HqlTest {
 		}
 
 		for (Author author : authors)
-			System.out.println(author);
+			System.out.println(author.getId() + ". " + author.getName());
 
 		System.out.println();
 
