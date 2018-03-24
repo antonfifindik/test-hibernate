@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.NotNull;
 
 @MappedSuperclass
 public abstract class Model implements Serializable {
@@ -18,6 +19,7 @@ public abstract class Model implements Serializable {
 	@Column(name = "id")
 	private Long id;
 
+	@NotNull(message = "Name can't be is null!")
 	@Column(name = "name")
 	private String name;
 
