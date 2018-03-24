@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 
+import com.test.hibernate.entities.Album;
 import com.test.hibernate.entities.Author;
 import com.test.hibernate.objects.HibernateUtil;
 
@@ -16,6 +17,7 @@ public class CriteriaTest {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
 		List<Author> authors = null;
+		List<Album> albums = null;
 
 		try {
 
@@ -30,6 +32,12 @@ public class CriteriaTest {
 
 			authors = criteria.list();
 
+			Criteria criteria2 = session.createCriteria(Album.class, "album");
+			criteria2.createCriteria("album.author", "author");
+			criteria2.createCriteria("album.genre", "genre");
+
+			albums = criteria2.list();
+
 			session.getTransaction().commit();
 
 		} catch (Exception e) {
@@ -41,7 +49,8 @@ public class CriteriaTest {
 		}
 
 		authors.stream().forEach(System.out::println);
-
+		System.out.println();
+		albums.stream().forEach(System.out::println);
 	}
 
 }
